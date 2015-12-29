@@ -4,5 +4,6 @@
     'use strict';
 
 module.exports = {
-    postCtrl :  require('./postController')
+    postCtrl : require('./postController'),
+    userCtrl : require('./userController')
 };

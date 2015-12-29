@@ -21,26 +21,17 @@ model.prototype = {
 
         schemas.userSchema = new mongoose.Schema({
             _id: String,
-            userID: {
-                type: String,
-                unique: true,
-                index: true
-            },
             pushNotificationsToken: String,
             name: String,
-            dateOfBirth: String,
+            age: String,
             pictureUrl: String,
+            email: String,
             GPSLocation: String,
             favorites: [{postID: {type: mongoose.Schema.Types.String, ref: 'Post'}}],
             following: [{userID: {type: mongoose.Schema.Types.String, ref: 'User'}}]
         });
         schemas.postSchema = new mongoose.Schema({
             _id: String,
-            postID: {
-                type: String,
-                unique: true,
-                index: true
-            },
             postedBy: {type: mongoose.Schema.Types.String, ref: 'User'},
             photoPath: String,
             price: String,

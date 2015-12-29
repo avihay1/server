@@ -12,6 +12,14 @@ router.post('/push', function(req, res, next){
   res.send("Got " + req.body.notification);
 });
 
+router.post('/login', function (req, res, next){
+
+  //ctrls.userCtrl.loginHandler(id, name, age, pictureUrl, email, GPSLocation, following, pushNotificationsToken);
+  ctrls.userCtrl.loginHandler(req.body);
+  console.log('User logged in ' + JSON.stringify(req.body));
+  res.sendStatus(200);
+});
+
 router.post('/post', function(req, res, next){
   ctrls.postCtrl.createPost(req.body, function (postCreated){
     if (postCreated)
