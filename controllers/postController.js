@@ -24,6 +24,24 @@ function sendGCM() {
     });
 }
 
+postController.createFileWriteStream = function (){
+    var Grid = require('gridfs-stream');
+    var gfs = Grid(model.mongo.db, model.mongo.con);
+
+    var id = require('mongoose').Types.ObjectId().toString();
+    var writeStream = gfs.createWriteStream({_id: id});
+    return {
+        imgWriteStream: writeStream,
+        imgId: id
+    };
+};
+
+postController.createFileReadStream = function (id) {
+    var Grid = require('gridfs-stream');
+    var gfs = Grid(model.mongo.db, model.mongo.con);
+    return gfs.createReadStream({_id: id});
+};
+
 postController.createPost = function (postData, callback) {
     var post = new model.models.Post();
     post._id = post.postID = Date.now().toString();
@@ -34,14 +52,14 @@ postController.createPost = function (postData, callback) {
     post.privacy = postData.privacy;
 
     post.save(function(err){
-       if (!err){
-           console.log("[postController.createPost] Successfully saved post! ");
-           callback(true);
-           sendGCM();
-       } else {
-           console.log("[postController.createPost] Could not save post. Error : " + err);
-           callback(false);
-       }
+        if (!err){
+            console.log("[postController.createPost] Successfully saved post! ");
+            callback(true);
+            sendGCM();
+        } else {
+            console.log("[postController.createPost] Could not save post. Error : " + err);
+            callback(false);
+        }
     });
 };
 

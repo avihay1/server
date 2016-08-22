@@ -5,18 +5,21 @@ var mongoose = require('mongoose');
 var model = function(){};
 var schemas = {};
 var models = {};
+var mongo = {};
 
 model.prototype = {
     'init': function (){
 
-        mongoose.connect('mongodb://localhost/Data',
-            {user: 'dataWriter', pass: 'Aa1234567'}
+        mongoose.connect('mongodb://localhost/Data'/*,
+            {user: 'dataWriter', pass: 'Aa1234567'}*/
         );
         mongoose.connection.on("error", function(err){
             console.log(err+'ERROR!! Could not connect to database [mongoHandler]');
         });
         mongoose.connection.once("open", function() {
             console.log("Connected.");
+            mongo.con = mongoose.mongo;
+            mongo.db = mongoose.connection.db;
         });
 
         schemas.userSchema = new mongoose.Schema({
@@ -49,5 +52,6 @@ var instance = new model();
 
 module.exports = {
     instance: instance,
-    models: models
-}
+    models: models,
+    mongo: mongo
+};
